@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public Text PlayerScoreText;
     public Text AIScoreText;
     public GameObject EnemyGoalText;
+    public GameObject PlayerGoalText;
+    
     public int PlayerScore = 0;
     public int AIScore = 0;
 
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
         timerIsRunning = true;
         gameOverText.SetActive(false);
         EnemyGoalText.SetActive(false);
+        PlayerGoalText.SetActive(false);
         DisplayTime(timeRemaining);
         PlayerScoreText.text = "Player: " + PlayerScore;
         AIScoreText.text = "AI: " + AIScore;
@@ -70,6 +73,10 @@ public class GameManager : MonoBehaviour
             puck.SetActive(false);
             EnemyGoal();
         }
+        else if(puckPos.x > 13.4){
+            puck.SetActive(false);
+            PlayerGoal();
+        }
     }
 
     void DisplayTime(float timeToDisplay)
@@ -85,6 +92,11 @@ public class GameManager : MonoBehaviour
 
     void EnemyGoal(){
         EnemyGoalText.SetActive(true);
+        Goal = true;
+    }
+
+    void PlayerGoal(){
+        PlayerGoalText.SetActive(true);
         Goal = true;
     }
  
