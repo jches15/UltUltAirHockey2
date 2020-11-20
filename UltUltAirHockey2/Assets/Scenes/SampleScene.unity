@@ -736,6 +736,8 @@ MonoBehaviour:
   player: {fileID: 1109398095}
   enemy: {fileID: 102419201}
   ydirPuck: 0
+  EnemyGoalText: {fileID: 291445186}
+  PlayerGoalText: {fileID: 2060896022}
   ScoreInstance: {fileID: 2046105841}
 --- !u!1 &843071908
 GameObject:

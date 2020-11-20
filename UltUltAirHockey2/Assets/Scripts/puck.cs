@@ -1,16 +1,19 @@
-﻿ using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class puck : MonoBehaviour
 {
     Rigidbody2D rb;
-    //GameObject puckk;
+
     float speed = 55;
     public Transform player;
     public Transform enemy;
     public float ydirPuck;
 
+    public GameObject EnemyGoalText;
+    public GameObject PlayerGoalText;
 
     public Score ScoreInstance;
     public static bool WasGoal {get; private set;}
@@ -38,12 +41,16 @@ public class puck : MonoBehaviour
             {
                 ScoreInstance.Increment(Score.Scores.PlayerScore);
                 WasGoal = true;
+                //transform.SetActive(false);
+                //puck.SetActive(false);
+                EnemyGoal();
             }
             else if (other.tag == "PlayerGoal")
             {
                 ScoreInstance.Increment(Score.Scores.AiScore);
                 WasGoal = true;
-              
+                //transform.SetActive(false);
+                PlayerGoal();
             }
         }
 
@@ -88,10 +95,26 @@ public class puck : MonoBehaviour
 
     }
 
-    private IEnumerator ResetPuck()
-    {
-        yield return new WaitForSecondsRealtime(1);
+    void EnemyGoal(){
+        //Debug.Log("heree");
+        EnemyGoalText.SetActive(true);
+        //Goal = true;
+        Invoke("Deactivate", 2);
+    }
+
+    void PlayerGoal(){
+        PlayerGoalText.SetActive(true);
+        Invoke("Deactivate",  2);
+        //Goal = true;
+    }
+
+    private void Deactivate(){
+        EnemyGoalText.SetActive(false);
+        PlayerGoalText.SetActive(false);
+        //Debug.Log("deactivate");
+        //puck.SetActive(true);
+        transform.position = new Vector2(0,0);
+        rb.velocity = new Vector2(0,0);
         WasGoal = false;
-        rb.velocity = rb.position = new Vector2(0,0);
     }
 }

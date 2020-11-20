@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         if(Goal){
             Goal = false;
             EnemyGoalText.SetActive(false);
-            Debug.Log("Here");
+            //Debug.Log("Here");
             Vector2 puckPosition = ThePuck.position;
             puckPosition.x = -7;
             puckPosition.y = -1;
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         }
         //if(GameObject.Find("puck").transform.position.x < -13.75){
         Vector2 puckPos = ThePuck.position;
+        /*
         if(puckPos.x < -13.75){
             //Debug.Log("yup");
             puck.SetActive(false);
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
         else if(puckPos.x > 13.4){
             puck.SetActive(false);
             PlayerGoal();
-        }
+        }*/
     }
 
     void DisplayTime(float timeToDisplay)
@@ -91,18 +92,27 @@ public class GameManager : MonoBehaviour
     }
 
     void EnemyGoal(){
+        Debug.Log("heree");
         EnemyGoalText.SetActive(true);
-        Goal = true;
+        //Goal = true;
+        Invoke("Deactivate", 2);
     }
 
     void PlayerGoal(){
         PlayerGoalText.SetActive(true);
         Goal = true;
     }
- 
-    IEnumerator Delay(){ 
-        yield return new WaitForSeconds (4f);
+
+    private void Deactivate(){
+        EnemyGoalText.SetActive(false);
+        Debug.Log("deactivate");
+        puck.SetActive(true);
+        Vector2 puckPosition = ThePuck.position;
+        puckPosition.x = -7;
+        puckPosition.y = -1;
     }
+ 
+    
     
 
 }
