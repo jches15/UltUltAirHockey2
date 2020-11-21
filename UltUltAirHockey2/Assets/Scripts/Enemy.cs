@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void FixedUpdate(){
+    public void FixedUpdate(){
         float movementSpeed;
 
         movementSpeed = MaxMovementSpeed * Random.Range(0.1f, 0.3f);
@@ -38,5 +38,8 @@ public class Enemy : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementSpeed * Time.fixedDeltaTime);
             }
         }*/
+    }
+    public void Goal(){
+        rb.velocity = new Vector2(0,0);
     }
 }

@@ -6,17 +6,23 @@ using UnityEngine.UI;
 public class puck : MonoBehaviour
 {
     Rigidbody2D rb;
+    Rigidbody2D enemyRb;
 
     float speed = 55;
     public Transform player;
     public Transform enemy;
     public float ydirPuck;
 
+    public Enemy stop;
+
     public GameObject EnemyGoalText;
     public GameObject PlayerGoalText;
 
     public Score ScoreInstance;
     public static bool WasGoal {get; private set;}
+
+    public bool GoalPlayer = false;
+    public bool GoalEnemy = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +35,7 @@ public class puck : MonoBehaviour
     void Update()
     {
         Vector2 dir = transform.position - enemy.position;
+        //moveAgain.GetComponent<Enemy>().FixedUpdate();
         //Debug.Log(dir.x);
     }
 
@@ -97,23 +104,49 @@ public class puck : MonoBehaviour
 
     void EnemyGoal(){
         //Debug.Log("heree");
+        transform.gameObject.SetActive(false);
+        //enemy.gameObject.SetActive(false);
+        //player.gameObject.SetActive(false);
         EnemyGoalText.SetActive(true);
-        //Goal = true;
+        GoalEnemy = true;
+        stop.Goal();
         Invoke("Deactivate", 2);
     }
 
     void PlayerGoal(){
         PlayerGoalText.SetActive(true);
+        //enemy.gameObject.SetActive(false);
+        //player.gameObject.SetActive(false);
+        transform.gameObject.SetActive(false);
+        stop.Goal();
         Invoke("Deactivate",  2);
-        //Goal = true;
+        GoalPlayer = true;
     }
 
     private void Deactivate(){
-        EnemyGoalText.SetActive(false);
-        PlayerGoalText.SetActive(false);
+        //enemyRb = enemy.GetComponent<Rigidbody2D>();
+        //enemyRb.velocity = new Vector2(0,0);
+        transform.gameObject.SetActive(true);
+        //enemy.gameObject.SetActive(true);
+        //player.gameObject.SetActive(true);
+        //player.position = new Vector2(-10, -1.32f);
+        //enemy.position = new Vector2(10, -1.32f);
+        if(GoalEnemy == true){
+            EnemyGoalText.SetActive(false);
+            transform.position = new Vector2(-7,-1);
+            GoalEnemy = false;
+        }
+        else{
+            PlayerGoalText.SetActive(false);
+            transform.position = new Vector2(7,-1);
+            GoalPlayer = false;
+        }
+        //EnemyGoalText.SetActive(false);
+        //PlayerGoalText.SetActive(false);
         //Debug.Log("deactivate");
         //puck.SetActive(true);
-        transform.position = new Vector2(0,0);
+        //transform.position = new Vector2(0,0);
+        stop.FixedUpdate();
         rb.velocity = new Vector2(0,0);
         WasGoal = false;
     }

@@ -15,6 +15,6 @@ public class collisionPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Physics2D.IgnoreCollision(puck.GetComponent<CircleCollider2D>(), transform.GetComponent<BoxCollider2D>());
     }
 }
