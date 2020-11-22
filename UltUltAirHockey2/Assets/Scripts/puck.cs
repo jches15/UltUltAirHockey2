@@ -8,7 +8,7 @@ public class puck : MonoBehaviour
     Rigidbody2D rb;
     Rigidbody2D enemyRb;
 
-    float speed = 55;
+    float speed = 30;
     public Transform player;
     public Transform enemy;
     public float ydirPuck;
@@ -24,6 +24,12 @@ public class puck : MonoBehaviour
     public bool GoalPlayer = false;
     public bool GoalEnemy = false;
 
+    public float randomNum;
+    public float seconds;
+    float timer = 0.0f;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +41,41 @@ public class puck : MonoBehaviour
     void Update()
     {
         Vector2 dir = transform.position - enemy.position;
+        Vector2 puckpos = transform.position;
+        float y = rb.velocity.y;
+        float x = rb.velocity.x;
+        //Debug.Log(y);
+        //Debug.Log(seconds);
+        //Debug.Log(transform.position.y);
+        if(puckpos.x > -3.15f && puckpos.x < 3.45f){ //if puck gets stuck in the middle
+            timer += Time.deltaTime;
+            seconds = timer % 60;
+            float ypositioncheck = puckpos.y;
+            Debug.Log(seconds);
+            float xpositioncheck = puckpos.x;
+            if(timer > 7){
+                //if(puckpos.y == ypositioncheck || puckpos.x == xpositioncheck){
+                    Debug.Log("here");
+                    transform.position = new Vector2(-7,-1);
+                //}
+            }
+        }
+        else{
+            timer = 0;
+        }
+
+        if((puckpos.x > 12.09 && puckpos.y < -4.5) || (puckpos.x > 12.09 && puckpos.y > 2.5)){ //puck gets stuck in enemy corners
+            randomNum = Random.Range(0, 2);
+            if(randomNum == 0){
+                transform.position = new Vector2(-7,-1);
+            }
+            else{
+                transform.position = new Vector2(7,-1);
+            }
+            Debug.Log("Puck was moved");
+        }
+        
+      
         //moveAgain.GetComponent<Enemy>().FixedUpdate();
         //Debug.Log(dir.x);
     }
@@ -69,7 +110,7 @@ public class puck : MonoBehaviour
                 Vector2 dir = player.position - transform.position;
                 if(dir.y > 0){ //ball is below player
                     ydirPuck = Random.Range(-1, -20);
-                    Debug.Log(ydirPuck);
+                    //Debug.Log(ydirPuck);
                     rb.AddForce(new Vector2(speed, ydirPuck), ForceMode2D.Impulse);
                 }
                 else if(dir.y == 0){ //if puck is right in front of player (unlikely)
@@ -77,25 +118,39 @@ public class puck : MonoBehaviour
                 }
                 else{ //ball is above player
                     ydirPuck = Random.Range(1, 20);
-                    Debug.Log(ydirPuck);
+                   //Debug.Log(ydirPuck);
                     rb.AddForce(new Vector2(speed, ydirPuck), ForceMode2D.Impulse);
                 }
                 //rb.AddForce(new Vector2(speed, 10), ForceMode2D.Impulse);
         }
         else if(col.gameObject.tag == "enemy"){
             Vector2 dir = transform.position - enemy.position;
-                if(dir.y > 0){ //ball is below player
+                
+                if(dir.y > 0){ //ball is above player
                     ydirPuck = Random.Range(-1, -20);
-                    Debug.Log(ydirPuck);
-                    rb.AddForce(new Vector2(-speed, ydirPuck), ForceMode2D.Impulse);
+                    //Debug.Log(ydirPuck);
+                    if(transform.position.x > enemy.position.x){
+                        rb.AddForce(new Vector2(speed / 2, ydirPuck), ForceMode2D.Impulse);
+                    }
+                    else{
+                        rb.AddForce(new Vector2(-speed, ydirPuck), ForceMode2D.Impulse);
+                    }
+                    //rb.AddForce(new Vector2(-speed, ydirPuck), ForceMode2D.Impulse);
+                    //rb.AddForce(new Vector2(speed, ydirPuck), ForceMode2D.Impulse);
                 }
                 else if(dir.y == 0){ //if puck is right in front of player (unlikely)
                     rb.AddForce(new Vector2(-speed, 0), ForceMode2D.Impulse);
                 }
-                else{ //ball is above player
+                else if(dir.y < 0){ //ball is below player
                     ydirPuck = Random.Range(1, 20);
-                    Debug.Log(ydirPuck);
-                    rb.AddForce(new Vector2(-speed, ydirPuck), ForceMode2D.Impulse);
+                    //Debug.Log(ydirPuck);
+                    if(transform.position.x > enemy.position.x){
+                        rb.AddForce(new Vector2(speed / 2, ydirPuck), ForceMode2D.Impulse);
+                    }
+                    else{
+                        rb.AddForce(new Vector2(-speed, ydirPuck), ForceMode2D.Impulse);
+                    }
+                    //rb.AddForce(new Vector2(speed, ydirPuck), ForceMode2D.Impulse);
                 }
                 //rb.AddForce(new Vector2(speed, 10), ForceMode2D.Impulse);
         }

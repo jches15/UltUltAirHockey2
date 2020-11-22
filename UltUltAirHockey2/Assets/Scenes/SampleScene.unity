@@ -277,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102419199}
   m_LocalRotation: {x: -0, y: -0, z: -0.94649786, w: 0.32271016}
-  m_LocalPosition: {x: 11.06, y: -3.29, z: 0}
+  m_LocalPosition: {x: 10.84, y: -1.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -678,7 +678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835364096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.44, y: -1.31, z: 0}
+  m_LocalPosition: {x: -6.24, y: -0.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -742,6 +742,8 @@ MonoBehaviour:
   ScoreInstance: {fileID: 2046105841}
   GoalPlayer: 0
   GoalEnemy: 0
+  randomNum: 0
+  seconds: 0
 --- !u!1 &843071908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,7 +1206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6af5471bd66ad842aa1067aa759dab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 10
+  timeRemaining: 240
   timerIsRunning: 0
   timeText: {fileID: 11261325}
   gameOverText: {fileID: 1180526782}
@@ -1428,6 +1430,36 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 437049fde556b4f4c8d23779d8353f8e, type: 2}
+    - target: {fileID: 4627200806236802604, guid: 9e59506f47173f84a83116f400c9ba97,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 4.8341146
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627200806236802604, guid: 9e59506f47173f84a83116f400c9ba97,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.048692226
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627200806236802604, guid: 9e59506f47173f84a83116f400c9ba97,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.26842022
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378808260813450283, guid: 9e59506f47173f84a83116f400c9ba97,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.3658142
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378808260813450283, guid: 9e59506f47173f84a83116f400c9ba97,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.048692465
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378808260813450283, guid: 9e59506f47173f84a83116f400c9ba97,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.26837158
+      objectReference: {fileID: 0}
     - target: {fileID: 5829851785060826887, guid: 9e59506f47173f84a83116f400c9ba97,
         type: 3}
       propertyPath: puck
